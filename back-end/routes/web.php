@@ -16,6 +16,7 @@
 // });
 
 $router->get('/', 'Controller@index');
+$router->put('/', 'Controller@update');
 
 // $router->group(['prefix' => 'main'], function () use ($router) {
 //     $router->get('/', 'Controller@index');
