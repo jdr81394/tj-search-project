@@ -11,11 +11,13 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+// $router->get('/', function () use ($router) {
+//     return $router->app->version();
+// });
 
-$router->group(['prefix' => 'main'], function () use ($router) {
-    $router->get('/', 'Controller@index');
+$router->get('/', 'Controller@index');
+
+// $router->group(['prefix' => 'main'], function () use ($router) {
+//     $router->get('/', 'Controller@index');
  
-});
+// });
