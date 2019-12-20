@@ -68,7 +68,10 @@ class Controller extends BaseController
             switch($request->action) {
                 case 'addToCart':
                     return $this->addToCart($request);
-                    break;
+                break;
+                case 'removeFromCart':
+                    return $this->removeFromCart($request);
+                break;
             }
         }
     }
@@ -103,23 +106,24 @@ class Controller extends BaseController
 
     private function removeFromCart($request) {
         try{
-
+            // return 'in remove cart';
             $remove_from_cart = $request->remove_from_cart;
             $user_id = $request->user_id;
 
-            //Gets cart and decodes it
-            $original_cart = DB::table('users')->select('cart')->where('id','=',$user_id)->first();
-            $cart = json_decode($original_cart);
+            //Get cart
+            $fetch_cart = DB::table('users')->select('cart')->where('id','=',$user_id)->first();
+            $cart = json_decode($fetch_cart->cart);
             // $key = array_search($remove_from_cart, $cart_to_alter);
 
             // $new_cart = unset($cart_to_alter[$key]);
 
             // Find position of item to be removed in array, and unset it. 
-            if (($key = array_search($remove_from_cart, $cart_to_alter)) !== false) {
-                unset($cart[$key]);
-            }
+            // return json_encode($cart);
+
+            $key = array_search($remove_from_cart, $cart);
+            array_splice($cart, $key, 1);            
            
-            $original_cart->update(json_encode($cart));
+            $updated_cart = DB::table('users')->select('cart')->where('id', '=', $user_id)->update(['cart' => $cart]);
 
             return response()->json_encode("The item was successfully removed from your cart.", 200);
 
