@@ -54,36 +54,64 @@ class Controller extends BaseController
     // This update function will be sending the items id number to a user's cart which will be an array 
     // Jake - Tested
     public function update(Request $request) {
+        // if ($request->has('action')) {
+        //     switch ($request->action) {
+        //         case 'addToCart':
+        //             return $this->addToCart($request);
+        //         break;
+        //         case 'removeFromCart':
+        //             return $this->removeFromCart($request);
+        //         break;
+        //     }
+        // }
         if ($request->has('action')) {
-            switch ($request->action) {
+            switch($request->action) {
                 case 'addToCart':
                     return $this->addToCart($request);
-                break;
-                case 'removeFromCart':
-                    return $this->removeFromCart($request);
-                break;
+                    break;
             }
         }
+        return 'hi';
     }
 
     private function addToCart($request) {
         try {
 
             // Item that was selected to be added
+
+            $arr1 = [];
+            $val1 = 10;
+
+            array_push($arr1, $val1);
+            // return $arr1;
+
             $add_to_cart = $request->add_to_cart;
             $user_id = $request->user_id;
-            // return "$add_to_cart and $user_id";
             // append item's id # to users' cart
             // $original_cart = DB::table('users')->select('cart')->where('id','=',$user_id)->first();
-            // $original_cart = DB::table('users')->select('cart')->where('id',$user_id)->get();
-            
-            // return gettype($original_cart[0]->cart);
+            $fetch_cart= DB::table('users')->select('cart')->where('id', '=', $user_id)->first();
+            $cart = json_decode($fetch_cart->cart);
+            // return gettype($original_cart);
+            // return json_encode($original_cart);
+            // return json_encode($original_cart->cart);
+            // return gettype(json_decode($original_cart[0]->cart));
             // return json_decode($original_cart[0]->cart);
-            // $new_cart = array_push(json_decode($original_cart[0]->cart), $add_to_cart);
+            // return gettype($add_to_cart);
+            if (gettype($add_to_cart) == 'string') {
+                $add_to_cart = (int)$add_to_cart;
+                
+            }
+            array_push($cart, $add_to_cart);
+            // return json_encode($original_cart);
             // return json_encode($new_cart);
-            // $update_params = ['cart' => $new_cart];
-            // $updated_cart = DB::table('users')->select('cart')->where('id', $user_id)->update($update_params);
+            $update_params = ['cart' => $cart];
             // return json_encode($update_params);
+            $updated_cart = DB::table('users')->select('cart')->where('id', '=', $user_id)->update($update_params);
+            return json_encode($updated_cart);
+            // return json_encode($update_params);
+            // return $original_cart[0]->cart . $add_to_cart;
+            // return $update_params;
+            // return json_decode($original_cart[0]);
             return response()->json_encode("The item was successfully added to your cart.", 200);
 
         } catch(Exception $e) {
