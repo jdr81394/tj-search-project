@@ -38,9 +38,10 @@ class Controller extends BaseController
     private function getBasicSearch($request) {
         try {
 
+
             $name = $request->name;
 
-            $result = DB::table('items')->select('*')->where('name', 'LIKE','%'.$name.'%')->limit(15)->get();
+            $result = DB::table('items')->select('name')->where('name', 'LIKE','%'.$name.'%')->limit(15)->get();
 
             return response()->json($result,200);
 
