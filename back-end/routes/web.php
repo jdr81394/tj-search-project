@@ -15,8 +15,8 @@
 //     return $router->app->version();
 // });
 
-$router->get('/', 'Controller@index');
-$router->put('/', 'Controller@update');
+$router->get('/',['uses' =>  'Controller@index', 'middleware' => 'cors']);
+$router->put('/', ['uses' => 'Controller@update', 'middleware' => 'cors']);
 
 // $router->group(['prefix' => 'main'], function () use ($router) {
 //     $router->get('/', 'Controller@index');

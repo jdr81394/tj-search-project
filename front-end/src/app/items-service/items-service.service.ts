@@ -17,7 +17,7 @@ export class ItemsServiceService {
     .set('name', basicSearch);
 
     // Jake - the first argument will need to be a route to whatever the backend server is.
-    return this.http.get('www.localhost:9000/', {params: params});
+    return this.http.get('http://localhost:9000/', {params: params});
   }
 
 
