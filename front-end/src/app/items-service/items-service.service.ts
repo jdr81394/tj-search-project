@@ -6,9 +6,21 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 })
 export class ItemsServiceService {
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
 
-  
+  ) { }
+
+  getItems(basicSearch) {
+    const params = new HttpParams()
+    .set('action','basicSearch')
+    .set('name', basicSearch);
+
+    // Jake - the first argument will need to be a route to whatever the backend server is.
+    return this.http.get('www.localhost:9000/', {params: params});
+  }
+
+
 
   
 }

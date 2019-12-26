@@ -8,14 +8,13 @@ import { ItemsServiceService } from '../items-service/items-service.service';
 })
 export class SearchItemsComponent implements OnInit {
 
-
-  searchItem: String;
+  basicSearch: String;
   result: String[]
 
   constructor(
-    private itemsService: ItemsServiceService;
+    private itemsService: ItemsServiceService
   ) { 
-    this.searchItem = '';
+    this.basicSearch = '';
     this.result = [];
   }
 
@@ -23,9 +22,12 @@ export class SearchItemsComponent implements OnInit {
   }
 
   getItems() {
-    this.itemsService.getItems(this.searchItem).subscribe(
-      (res) => {
-        
+    this.itemsService.getItems(this.basicSearch).subscribe(
+      (res: String[]) => {
+        this.result = res;
+        console.log("this result:   "  ,this.result);
+        return this.result;
+
       }
     )
   }
