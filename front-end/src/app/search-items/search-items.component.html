@@ -1,7 +1,7 @@
-<mat-form class="container">
-  <mat-form-field>
-    <input matInput [(ngModel)]="basicSearch" placeholder="Input">
-  </mat-form-field>
+<form class="container">
+
+  <input [(ngModel)]="basicSearch" name='basicSearch'placeholder="Input">
+ 
   <button mat-button (click) = "getItems()" >Click me!</button>
 
-</mat-form>
+</form>

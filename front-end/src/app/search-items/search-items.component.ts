@@ -22,6 +22,7 @@ export class SearchItemsComponent implements OnInit {
   }
 
   getItems() {
+    console.log("basic search:  "  ,this.basicSearch);
     this.itemsService.getItems(this.basicSearch).subscribe(
       (res: String[]) => {
         this.result = res;
