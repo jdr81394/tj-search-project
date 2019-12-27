@@ -20,14 +20,19 @@ export class ItemsServiceService {
     return this.http.get('http://localhost:9000/', {params: params});
   }
 
-  sendEmail(cart, textarea) {
-    console.log("in send email in service");
+  sendEmail(cart, name, senderEmail, message) {
+    console.log("name in ts:  "  ,name);
+    console.log("senderemail in ts:  " , senderEmail);
+    console.log("message in ts:  " ,message);
     const params = new HttpParams()
     .set('action', 'sendEmail')
-    .set('cart', cart)
-    .set('textarea', textarea);
+    .set('cart', JSON.stringify(cart))
+    .set('name', name)
+    .set('senderEmail', senderEmail)
+    .set('message', message);
+    console.log("params total :  "  ,params);
 
-    return this.http.post('http://localhost:9000/', {params: params});
+    return this.http.post('http://localhost:9000/',  params);
 
   }
 

@@ -65,10 +65,13 @@ export class AppComponent {
   }
 
   checkout(event) {
-    console.log(" in app compnoent");
-    let textarea = event.srcElement.elements[0].value;
-    console.log("textara:  " ,textarea);
-    this.itemsService.sendEmail(this.cart, textarea).subscribe();
+    let name = event.srcElement.elements[0].value;
+    let senderEmail = event.srcElement.elements[1].value;
+    let message = event.srcElement.elements[2].value;
+    console.log("name in ts:  "  ,name);
+    console.log("senderemail in ts:  " , senderEmail);
+    console.log("message in ts:  " ,message);
+    this.itemsService.sendEmail(this.cart, name, senderEmail, message).subscribe();
   }
 
 }

@@ -40,9 +40,9 @@
         </button>
     </div>
     <form (ngSubmit) = 'checkout($event)'>
-        <textarea class = 'textarea'>
-            type any additional details in here.
-        </textarea>
+        <input placeholder = 'Name' required />
+        <input placeholder = 'Email' required />
+        <input placeholder = 'Type additional details in here.' class = 'message'/>
         <button type='submit'>
             Check Out
         </button>

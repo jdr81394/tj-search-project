@@ -146,8 +146,14 @@ class Controller extends BaseController
     public function store(Request $request) {
         try {
 
-            $mail = new PHPMailer(true);
+            $cart = $request->cart;
+            $senderName = $request->name;
+            $senderEmail = $request->senderEmail;
+            $message = $request->message;
+            Log::info("$cart , $senderName , $senderEmail , $message");
 
+            // Jake - must change username and password to client's username & password . 
+            $mail = new PHPMailer(true);
             $mail->SMTPDebug = 2;                                       // Enable verbose debug output
             $mail->isSMTP();                                            // Send using SMTP
             $mail->Host = 'smtp.gmail.com';                             // Set the SMTP server to send through
@@ -157,29 +163,42 @@ class Controller extends BaseController
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
             $mail->Port       = 587;                                    // TCP port to connect to
         
-            //Recipients
-            $mail->setFrom('jdr81394@gmail.com', 'Mailer');
-            $mail->addAddress('jdr81394@gmail.com', 'Joe User');     // Add a recipient
-            $mail->addAddress('jdr81394@gmail.com');               // Name is optional
-            $mail->addReplyTo('info@example.com', 'Information');
-            $mail->addCC('jdr81394@gmail.com');
-            $mail->addBCC('bcc@example.com');
-          $mail->SMTPOptions = array(
+            // //Recipients
+            $mail->setFrom("$senderEmail", "$senderName");
+            $mail->addAddress('jdr81394@gmail.com', 'Joe User');    // Jake - Change to whoever TJ wants the target to be
+            $mail->addReplyTo("$senderEmail", "$senderName");
+            $mail->SMTPOptions = array(
                 'ssl' => array(
                     'verify_peer' => false,
                     'verify_peer_name' => false,
                     'allow_self_signed' => true
                 )
             );
-            // Attachments
-            // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-        
-            // Content
+
+            Log::info("gettype of cart:  " .gettype($cart));
+            $itemBody = "";
+            Log::info("cart:  $cart");
+            foreach(json_decode($cart) AS $item) {
+            
+            $itemBody = $itemBody . "<tr>
+              <td>$item->name</td>
+              <td>$item->quantity</td>
+            </tr>";
+            }
+
+            Log::info("itembody:   $itemBody");
+
+            // // Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Here is the subject';
-            $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            $mail->Subject = 'A new request came in!';
+            $mail->Body = "<table>
+                        <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        </tr>
+                        $itemBody
+                    </table>";
+            Log::info("mail body:   "  .$mail->Body);
         
             $mail->send();
             echo 'Message has been sent';
