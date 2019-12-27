@@ -32,13 +32,21 @@
 <div class = 'cart-page' *ngIf = 'cartVisible'>
     <div *ngFor = 'let item of cart; let i = index'>
         <div class = 'item-name'>
-            {{item}}
+            {{item.name }}
         </div>
+        <input disabled name='quantity' type='number'> {{item.quantity}}
         <button class ='remove-item' (click) = removeItem(i)>
             Remove {{i}}
         </button>
     </div>
-
+    <form (ngSubmit) = 'checkout($event)'>
+        <textarea class = 'textarea'>
+            type any additional details in here.
+        </textarea>
+        <button type='submit'>
+            Check Out
+        </button>
+    </form>
   
 
 </div>

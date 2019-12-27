@@ -20,6 +20,17 @@ export class ItemsServiceService {
     return this.http.get('http://localhost:9000/', {params: params});
   }
 
+  sendEmail(cart, textarea) {
+    console.log("in send email in service");
+    const params = new HttpParams()
+    .set('action', 'sendEmail')
+    .set('cart', cart)
+    .set('textarea', textarea);
+
+    return this.http.post('http://localhost:9000/', {params: params});
+
+  }
+
 
 
   

@@ -64,4 +64,11 @@ export class AppComponent {
     console.log('this cart:'  ,this.cart);
   }
 
+  checkout(event) {
+    console.log(" in app compnoent");
+    let textarea = event.srcElement.elements[0].value;
+    console.log("textara:  " ,textarea);
+    this.itemsService.sendEmail(this.cart, textarea).subscribe();
+  }
+
 }
