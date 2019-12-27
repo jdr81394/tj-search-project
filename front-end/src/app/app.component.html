@@ -1,6 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<div style ='background-color: black; height: 35px; width: 100%;'> </div>
 <div class ='main-nav m-4'>
-    <img src="../assets/LOGO.png" style = 'width: 100px; height: 100px;'/>
+    <a href='/' > <img src="../assets/LOGO.png" style = 'width: 100px; height: 100px;'/></a>
     <button class ='search-cart-button'*ngIf = 'cartVisible == false;' style='background-image: url("../assets/cart.png");' mat-button-raised (click) = 'changeStatus()'></button>
     <button class='search-cart-button'*ngIf = 'cartVisible == true;' style='background-image: url("../assets/home.png");' mat-button-raised (click) = 'changeStatus()'> </button>
 </div>
@@ -12,7 +13,7 @@
         <input [(ngModel)]="basicSearch" (keyup) = "getItems()" name='basicSearch'placeholder="Search Item">
     </form>
 
-    <div *ngFor = 'let item of result'>
+    <div class='search-item-list' *ngFor = 'let item of result'>
         <div name= 'name' class ='item-name' >
             {{ item.name }}
         </div>

@@ -50,3 +50,17 @@
 .search-form > input:focus {
     border: transparent;
 }
+
+.search-item-list {
+    display: flex;
+    justify-content: space-between;    
+    margin-top: 50px;
+}
+
+.search-item-list > form {
+    margin-left: 25px;
+}
+
+.search-item-list > form > input {
+    margin-right: 25px;
+}
