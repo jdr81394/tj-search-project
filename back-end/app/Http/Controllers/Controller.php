@@ -133,6 +133,17 @@ class Controller extends BaseController
         }
     }
 
+    public function store(Request $request) {
+        try {
+
+            Log::info("reached send email");
+
+            mail('jdr81394@gmail.com', 'test', 'testtt', 'headers test');
+
+        } catch(Exception $e) {
+
+        }
+    }
 
 
 

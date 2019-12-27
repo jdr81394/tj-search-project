@@ -16,6 +16,7 @@
 // });
 
 $router->get('/',['uses' =>  'Controller@index', 'middleware' => 'cors']);
+$router->post('/', ['uses' =>  'Controller@store', 'middleware' => 'cors']);
 $router->put('/', ['uses' => 'Controller@update', 'middleware' => 'cors']);
 
 // $router->group(['prefix' => 'main'], function () use ($router) {
