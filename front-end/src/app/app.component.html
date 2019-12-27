@@ -1,32 +1,29 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class ='main-nav'>
-
-            <button mat-button-raised (click) = 'changeStatus()'>
-                <p *ngIf = 'cartVisible == false'> Cart </p>
-                <p *ngIf = 'cartVisible == true'> Home </p>
-            </button>
+<div class ='main-nav m-4'>
+    <img src="../assets/LOGO.png" style = 'width: 100px; height: 100px;'/>
+    <button class ='search-cart-button'*ngIf = 'cartVisible == false;' style='background-image: url("../assets/cart.png");' mat-button-raised (click) = 'changeStatus()'></button>
+    <button class='search-cart-button'*ngIf = 'cartVisible == true;' style='background-image: url("../assets/home.png");' mat-button-raised (click) = 'changeStatus()'> </button>
 </div>
 
-<div *ngIf = 'searchVisible' class ='search-page'>
-    <form class="container">
-
-        <input [(ngModel)]="basicSearch" name='basicSearch'placeholder="Input">
-    
-        <button mat-button (click) = "getItems()" >Click me!</button>
+<div class ='search-page' *ngIf='searchVisible' >
+    <h2> A More Powerful Way To Order</h2>
+    <span> Please order 24 hours in advance </span>
+    <form class="search-form container">
+        <input [(ngModel)]="basicSearch" (keyup) = "getItems()" name='basicSearch'placeholder="Search Item">
     </form>
-    
-            <div *ngFor = 'let item of result'>
-                <div name= 'name' class ='item-name' >
-                    {{ item.name }}
-                </div>
-            <form (ngSubmit) = 'addToCart($event, item.name)'class = 'item-table'> 
-                <input placeholder = '0' name='quantity' type= 'number'>
-                <button mat-button type='submit'>
-                    Add to Cart
-                </button>
-            </form>
 
-            </div>
+    <div *ngFor = 'let item of result'>
+        <div name= 'name' class ='item-name' >
+            {{ item.name }}
+        </div>
+        <form (ngSubmit) = 'addToCart($event, item.name)'class = 'item-table'> 
+            <input placeholder = '0' name='quantity' type= 'number'>
+            <button mat-button type='submit'>
+                Add to Cart
+            </button>
+        </form>
+    </div>
+
 </div>
   
 <div class = 'cart-page' *ngIf = 'cartVisible'>
@@ -50,10 +47,3 @@
   
 
 </div>
-
-<!-- <router-outlet></router-outlet> -->
-
-
-
-
-<!-- <app-cart></app-cart> -->
