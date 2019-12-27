@@ -10,6 +10,8 @@ export class AppComponent {
   title = 'front-end';
 
 
+  cartVisible = false;
+  searchVisible = true;
   cart: String[];
   basicSearch: String;
   result: String[]
@@ -22,22 +24,35 @@ export class AppComponent {
     this.result = [];
   }
 
+  changeStatus() {
+    if(this.searchVisible == true) {
+      this.searchVisible = false;
+    } else {
+      this.searchVisible = true;
+    }
+    if(this.cartVisible == true) {
+      this.cartVisible = false;
+    } else {
+      this.cartVisible = true;
+    }
+  }
+
   addToCart(item) {
-    console.log('item is in cart:  ' ,item);
     this.cart.push(item);
-    console.log("cart:: "  ,this.cart);
   }
 
   getItems() {
-    console.log("basic search:  "  ,this.basicSearch);
     this.itemsService.getItems(this.basicSearch).subscribe(
       (res: String[]) => {
         this.result = res;
-        console.log("this result:   "  ,this.result);
         return this.result;
-
       }
     )
+  }
+
+  removeItem(x) {
+    this.cart.splice(x,1);
+    console.log('this cart:'  ,this.cart);
   }
 
 }

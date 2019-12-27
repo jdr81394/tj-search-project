@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { BrowserModule } from '@angular/platform-browser';
 
+import {CartRoutingModule} from './cart-routing.module'
 
 import { CartComponent } from './cart.component';
 
@@ -9,7 +10,8 @@ import { CartComponent } from './cart.component';
   declarations: [CartComponent],
   exports: [CartComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    CartRoutingModule
     // BrowserModule
   ]
 })

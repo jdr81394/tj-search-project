@@ -1,35 +1,47 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class ='main-nav'>
-    <ul>
-        <li>
-            <a routerLink='/cart' routerLinkActive="active-link">
-                Cart
-            </a>
-        </li>
-    </ul>
+
+            <button mat-button-raised (click) = 'changeStatus()'>
+                <p *ngIf = 'cartVisible == false'> Cart </p>
+                <p *ngIf = 'cartVisible == true'> Home </p>
+            </button>
 </div>
-<form class="container">
+<div *ngIf = 'searchVisible' class ='search-page'>
+    <form class="container">
 
-    <input [(ngModel)]="basicSearch" name='basicSearch'placeholder="Input">
-   
-    <button mat-button (click) = "getItems()" >Click me!</button>
-  
-  </form>
-  
-  <div class = 'item-table'> 
-    <div *ngFor = 'let item of result'>
-      <div class ='item-name'>
-        {{ item.name }}
-      </div>
-      <button mat-button (click) ="addToCart(item.name)">
-        Add to Cart
-      </button>
+        <input [(ngModel)]="basicSearch" name='basicSearch'placeholder="Input">
+    
+        <button mat-button (click) = "getItems()" >Click me!</button>
+    </form>
+    <div class = 'item-table'> 
+            <div *ngFor = 'let item of result'>
+            <div class ='item-name'>
+                {{ item.name }}
+            </div>
+            <button mat-button (click) ="addToCart(item.name)">
+                Add to Cart
+            </button>
+            </div>
     </div>
-  </div>
+</div>
   
+ 
   
 
-<router-outlet></router-outlet>
+  
+  
+<div class = 'cart-page' *ngIf = 'cartVisible'>
+    <div *ngFor = 'let item of cart; let i = index'>
+        <div class = 'item-name'>
+            {{item}}
+        </div>
+        <button class ='remove-item' (click) = removeItem(i)>
+            Remove {{i}}
+        </button>
+    </div>
+</div>
+
+<!-- <router-outlet></router-outlet> -->
 
 
 
