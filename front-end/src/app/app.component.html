@@ -8,7 +8,26 @@
         </li>
     </ul>
 </div>
-<app-search-items></app-search-items>
+<form class="container">
+
+    <input [(ngModel)]="basicSearch" name='basicSearch'placeholder="Input">
+   
+    <button mat-button (click) = "getItems()" >Click me!</button>
+  
+  </form>
+  
+  <div class = 'item-table'> 
+    <div *ngFor = 'let item of result'>
+      <div class ='item-name'>
+        {{ item.name }}
+      </div>
+      <button mat-button (click) ="addToCart(item.name)">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+  
+  
 
 <router-outlet></router-outlet>
 
