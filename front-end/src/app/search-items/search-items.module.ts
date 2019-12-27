@@ -12,6 +12,7 @@ import { ItemsServiceService } from '../items-service/items-service.service';
 // import { MatInputModule } from '@angular/material/input';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule} from '@angular/common/http';
+// import {CartModule } from '../cart/cart.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HttpClientModule} from '@angular/common/http';
     HttpModule,
     HttpClientModule,
     FormsModule,
+    // CartModule,
     // MatFormFieldModule,
     // MatSelectModule,
     BrowserModule

@@ -8,17 +8,25 @@ import { ItemsServiceService } from '../items-service/items-service.service';
 })
 export class SearchItemsComponent implements OnInit {
 
+  cart: String[];
   basicSearch: String;
   result: String[]
 
   constructor(
     private itemsService: ItemsServiceService
   ) { 
+    this.cart = [];
     this.basicSearch = '';
     this.result = [];
   }
 
   ngOnInit() {
+  }
+
+  addToCart(item) {
+    console.log('item is in cart:  ' ,item);
+    this.cart.push(item);
+    console.log("cart:: "  ,this.cart);
   }
 
   getItems() {

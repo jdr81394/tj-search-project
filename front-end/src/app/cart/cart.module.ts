@@ -7,6 +7,7 @@ import { CartComponent } from './cart.component';
 
 @NgModule({
   declarations: [CartComponent],
+  exports: [CartComponent],
   imports: [
     CommonModule,
     BrowserModule
