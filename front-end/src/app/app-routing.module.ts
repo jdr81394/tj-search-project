@@ -5,11 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
 
-  {
-    path: 'cart',
-    // component: CartComponent
-    loadChildren: './cart/cart.module#CartModule'
-  }
+  // {
+  //   path: 'cart',
+  //   // component: CartComponent
+  //   loadChildren: './cart/cart.module#CartModule'
+  // }
 
 
 ];
