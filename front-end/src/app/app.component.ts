@@ -71,7 +71,11 @@ export class AppComponent {
     console.log("name in ts:  "  ,name);
     console.log("senderemail in ts:  " , senderEmail);
     console.log("message in ts:  " ,message);
-    this.itemsService.sendEmail(this.cart, name, senderEmail, message).subscribe();
+    this.itemsService.sendEmail(this.cart, name, senderEmail, message).subscribe(
+      (res: any) => {}
+    );
+    window.alert('Your request was successfully sent!');
+    window.location.reload();
   }
 
 }
