@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ItemsServiceService } from './items-service/items-service.service';
+import { Item } from './classes/item';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent {
 
   cartVisible = false;
   searchVisible = true;
-  cart: String[];
+  cart: Item[];
   basicSearch: String;
   result: String[]
 
@@ -37,8 +38,16 @@ export class AppComponent {
     }
   }
 
-  addToCart(item) {
+  addToCart(event, name) {
+    // console.log(event);
+    // console.log(event.srcElement.elements[0].valueAsNumber);
+    // console.log(event.srcElement.elements[0].value);
+    let quantity = event.srcElement.elements[0].valueAsNumber;
+    // console.log(" name:  "  ,name);
+    let item = new Item(name, quantity);
+    // quantity = quantity.value;
     this.cart.push(item);
+    console.log(" this cart:  "  ,this.cart);
   }
 
   getItems() {

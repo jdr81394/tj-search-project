@@ -6,6 +6,7 @@
                 <p *ngIf = 'cartVisible == true'> Home </p>
             </button>
 </div>
+
 <div *ngIf = 'searchVisible' class ='search-page'>
     <form class="container">
 
@@ -13,22 +14,20 @@
     
         <button mat-button (click) = "getItems()" >Click me!</button>
     </form>
-    <div class = 'item-table'> 
+    
             <div *ngFor = 'let item of result'>
-            <div class ='item-name'>
-                {{ item.name }}
-            </div>
-            <button mat-button (click) ="addToCart(item.name)">
-                Add to Cart
-            </button>
-            </div>
-    </div>
-</div>
-  
- 
-  
+                <div name= 'name' class ='item-name' >
+                    {{ item.name }}
+                </div>
+            <form (ngSubmit) = 'addToCart($event, item.name)'class = 'item-table'> 
+                <input placeholder = '0' name='quantity' type= 'number'>
+                <button mat-button type='submit'>
+                    Add to Cart
+                </button>
+            </form>
 
-  
+            </div>
+</div>
   
 <div class = 'cart-page' *ngIf = 'cartVisible'>
     <div *ngFor = 'let item of cart; let i = index'>
@@ -39,6 +38,9 @@
             Remove {{i}}
         </button>
     </div>
+
+  
+
 </div>
 
 <!-- <router-outlet></router-outlet> -->
