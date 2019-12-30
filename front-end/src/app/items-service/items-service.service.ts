@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -21,19 +21,14 @@ export class ItemsServiceService {
   }
 
   sendEmail(cart, name, senderEmail, message) {
-    console.log("name in ts:  "  ,name);
-    console.log("senderemail in ts:  " , senderEmail);
-    console.log("message in ts:  " ,message);
     const params = new HttpParams()
     .set('action', 'sendEmail')
     .set('cart', JSON.stringify(cart))
     .set('name', name)
     .set('senderEmail', senderEmail)
     .set('message', message);
-    console.log("params total :  "  ,params);
 
     return this.http.post('http://localhost:9000/',  params);
-
   }
 
 

@@ -8,19 +8,17 @@ import { Item } from './classes/item';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'front-end';
+  title = 'Surge';
 
 
-  cartVisible = false;
   searchVisible = true;
   cart: Item[];
+  cartPageOfItems: Item[];
+  cartVisible = false;
   basicSearch: String;
   result: String[];
   pageOfItems: String[];
-
-  cartPageOfItems: Item[];
   
-  //Jake - swap back cartvisible and search visible settings
   constructor(
     private itemsService: ItemsServiceService
   ) { 
@@ -51,17 +49,11 @@ export class AppComponent {
     this.pageOfItems = pageOfItems;
 }
 
-  addToCart(event, name) {
-    // console.log(event);
-    // console.log(event.srcElement.elements[0].valueAsNumber);
-    // console.log(event.srcElement.elements[0].value);
+  addToCart(event, name) {  
     let quantity = event.srcElement.elements[0].valueAsNumber;
-    // console.log(" name:  "  ,name);
     if(quantity > 0) {
       let item = new Item(name, quantity);
-      // quantity = quantity.value;
       this.cart.push(item);
-      console.log(" this cart:  "  ,this.cart);
       window.alert("Your cart was updated!");
     } else {
       window.alert("Please select a quantity!");
@@ -83,16 +75,13 @@ export class AppComponent {
   removeItem(x) {
     this.cartPageOfItems.splice(x,1);
     this.cart.splice(x,1);
-    console.log('this cart:'  ,this.cart);
   }
 
   checkout(event) {
     let name = event.srcElement.elements[0].value;
     let senderEmail = event.srcElement.elements[1].value;
     let message = event.srcElement.elements[2].value;
-    console.log("name in ts:  "  ,name);
-    console.log("senderemail in ts:  " , senderEmail);
-    console.log("message in ts:  " ,message);
+   
     this.itemsService.sendEmail(this.cart, name, senderEmail, message).subscribe(
       (res: any) => {}
     );
