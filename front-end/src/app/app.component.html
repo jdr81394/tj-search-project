@@ -39,6 +39,7 @@
     </div>
     <form (ngSubmit) = 'checkout($event)'>
         <div class = 'd-flex flex-column align-items-center form-group'>
+            <h2 class = 'mb-5' *ngIf = 'cart.length < 1'>  There is nothing in your cart! </h2>
             <input class = 'row w-50 form-control-sm' placeholder = 'Name' type='text' required />
             <input class=' m-2 row w-50 form-control-sm'placeholder = 'Email' type='text' required />
             <textarea rows = '4' class= 'mb-2 message w-50 form-control-sm' placeholder = 'Type additional details in here.'  type='text'></textarea>
