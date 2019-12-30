@@ -11,12 +11,13 @@ export class AppComponent {
   title = 'front-end';
 
 
-  cartVisible = false;
-  searchVisible = true;
+  cartVisible = true;
+  searchVisible = false;
   cart: Item[];
   basicSearch: String;
   result: String[]
-
+  
+  //Jake - swap back cartvisible and search visible settings
   constructor(
     private itemsService: ItemsServiceService
   ) { 
@@ -48,15 +49,18 @@ export class AppComponent {
     // quantity = quantity.value;
     this.cart.push(item);
     console.log(" this cart:  "  ,this.cart);
+    window.alert("Your cart was updated!");
   }
 
   getItems() {
-    this.itemsService.getItems(this.basicSearch).subscribe(
-      (res: String[]) => {
-        this.result = res;
-        return this.result;
-      }
-    )
+    if(this.basicSearch.length > 0) {
+      this.itemsService.getItems(this.basicSearch).subscribe(
+        (res: String[]) => {
+          this.result = res;
+          return this.result;
+        }
+      )
+    } 
   }
 
   removeItem(x) {

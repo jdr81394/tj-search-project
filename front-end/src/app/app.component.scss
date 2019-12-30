@@ -64,3 +64,13 @@
 .search-item-list > form > input {
     margin-right: 25px;
 }
+
+.cart-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-list > input {
+    margin: 25px;
+}

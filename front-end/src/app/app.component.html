@@ -28,22 +28,24 @@
 </div>
   
 <div class = 'cart-page' *ngIf = 'cartVisible'>
-    <div *ngFor = 'let item of cart; let i = index'>
+    <div class = 'cart-list' *ngFor = 'let item of cart; let i = index'>
         <div class = 'item-name'>
             {{item.name }}
         </div>
-        <input disabled name='quantity' type='number'> {{item.quantity}}
+        <input disabled name='quantity' type='number' [value] = 'item.quantity'> 
         <button class ='remove-item' (click) = removeItem(i)>
-            Remove {{i}}
+            Remove 
         </button>
     </div>
     <form (ngSubmit) = 'checkout($event)'>
-        <input placeholder = 'Name' required />
-        <input placeholder = 'Email' required />
-        <input placeholder = 'Type additional details in here.' class = 'message'/>
-        <button type='submit'>
-            Check Out
-        </button>
+        <div class = 'd-flex flex-column align-items-center form-group'>
+            <input class = 'row w-50 form-control-sm' placeholder = 'Name' type='text' required />
+            <input class=' m-2 row w-50 form-control-sm'placeholder = 'Email' type='text' required />
+            <textarea rows = '4' class= 'mb-2 message w-50 form-control-sm' placeholder = 'Type additional details in here.'  type='text'></textarea>
+            <button type='submit'>
+                Check Out
+            </button>
+        </div>
     </form>
   
 

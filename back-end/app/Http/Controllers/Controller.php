@@ -51,7 +51,7 @@ class Controller extends BaseController
 
             $name = $request->name;
 
-            $result = DB::table('items')->select('name')->where('name', 'LIKE','%'.$name.'%')->limit(15)->get();
+            $result = DB::table('items')->select('name')->where('name', 'LIKE','%'.$name.'%')->limit(14)->get();
 
             return response()->json($result,200);
 
