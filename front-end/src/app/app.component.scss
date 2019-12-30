@@ -65,6 +65,14 @@
     margin-right: 25px;
 }
 
+.cart-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
 .cart-list {
     display: flex;
     justify-content: center;

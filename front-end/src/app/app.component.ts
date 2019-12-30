@@ -11,11 +11,14 @@ export class AppComponent {
   title = 'front-end';
 
 
-  cartVisible = true;
-  searchVisible = false;
+  cartVisible = false;
+  searchVisible = true;
   cart: Item[];
   basicSearch: String;
-  result: String[]
+  result: String[];
+  pageOfItems: String[];
+
+  cartPageOfItems: Item[];
   
   //Jake - swap back cartvisible and search visible settings
   constructor(
@@ -39,17 +42,31 @@ export class AppComponent {
     }
   }
 
+  onChangePageCart(cartPageOfItems: Item[]) {
+    this.cartPageOfItems = cartPageOfItems;
+  }
+
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
+
   addToCart(event, name) {
     // console.log(event);
     // console.log(event.srcElement.elements[0].valueAsNumber);
     // console.log(event.srcElement.elements[0].value);
     let quantity = event.srcElement.elements[0].valueAsNumber;
     // console.log(" name:  "  ,name);
-    let item = new Item(name, quantity);
-    // quantity = quantity.value;
-    this.cart.push(item);
-    console.log(" this cart:  "  ,this.cart);
-    window.alert("Your cart was updated!");
+    if(quantity > 0) {
+      let item = new Item(name, quantity);
+      // quantity = quantity.value;
+      this.cart.push(item);
+      console.log(" this cart:  "  ,this.cart);
+      window.alert("Your cart was updated!");
+    } else {
+      window.alert("Please select a quantity!");
+    }
+   
   }
 
   getItems() {
@@ -64,6 +81,7 @@ export class AppComponent {
   }
 
   removeItem(x) {
+    this.cartPageOfItems.splice(x,1);
     this.cart.splice(x,1);
     console.log('this cart:'  ,this.cart);
   }

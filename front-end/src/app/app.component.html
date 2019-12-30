@@ -13,7 +13,7 @@
         <input [(ngModel)]="basicSearch" (keyup) = "getItems()" name='basicSearch'placeholder="Search Item">
     </form>
 
-    <div class='search-item-list' *ngFor = 'let item of result'>
+    <div class='search-item-list' *ngFor = 'let item of pageOfItems'>
         <div name= 'name' class ='item-name' >
             {{ item.name }}
         </div>
@@ -24,22 +24,32 @@
             </button>
         </form>
     </div>
+   
+    <jw-pagination [initialPage] = '1' [pageSize] = '10' [maxPages] = '100' class = 'mt-5 '[items]="result" (changePage)="onChangePage($event)"></jw-pagination>
+
+
 
 </div>
   
 <div class = 'cart-page' *ngIf = 'cartVisible'>
-    <div class = 'cart-list' *ngFor = 'let item of cart; let i = index'>
-        <div class = 'item-name'>
-            {{item.name }}
+    <div *ngIf = 'cart.length > 0'class = 'cart-section'>
+        <h2 class = 'mb-5'> Your Cart </h2>
+        <div class = 'cart-list' *ngFor = 'let item of cartPageOfItems; let i = index'>
+            <div class = 'item-name'>
+                {{item.name }}
+            </div>
+            <input disabled name='quantity' type='number' [value] = 'item.quantity'> 
+            <button class ='remove-item' (click) = removeItem(i)>
+                Remove 
+            </button>
         </div>
-        <input disabled name='quantity' type='number' [value] = 'item.quantity'> 
-        <button class ='remove-item' (click) = removeItem(i)>
-            Remove 
-        </button>
+        <jw-pagination [initialPage] = '1' [pageSize] = '10' [maxPages] = '100' class = 'mt-5 '[items]="cart" (changePage)="onChangePageCart($event)"></jw-pagination>
     </div>
-    <form (ngSubmit) = 'checkout($event)'>
+    <div class ='d-flex flex-column align-items-center'>
+        <h2 class = 'mb-5' *ngIf = 'cart.length < 1'>  There is nothing in your cart! </h2>
+    </div>
+    <form *ngIf = 'cart.length > 0'(ngSubmit) = 'checkout($event)'>
         <div class = 'd-flex flex-column align-items-center form-group'>
-            <h2 class = 'mb-5' *ngIf = 'cart.length < 1'>  There is nothing in your cart! </h2>
             <input class = 'row w-50 form-control-sm' placeholder = 'Name' type='text' required />
             <input class=' m-2 row w-50 form-control-sm'placeholder = 'Email' type='text' required />
             <textarea rows = '4' class= 'mb-2 message w-50 form-control-sm' placeholder = 'Type additional details in here.'  type='text'></textarea>
