@@ -125,14 +125,14 @@ class Controller extends BaseController
             $mail->isSMTP();                                            // Send using SMTP
             $mail->Host = 'smtp.gmail.com';                             // Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-            $mail->Username   = 'jdr81394@gmail.com';                   // SMTP username
-            $mail->Password   = 'Bbknights1!';                          // SMTP password
+            $mail->Username   = '';                   // SMTP username
+            $mail->Password   = '';                          // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
             $mail->Port       = 587;                                    // TCP port to connect to
         
             // //Recipients
             $mail->setFrom("$senderEmail", "$senderName");
-            $mail->addAddress('jdr81394@gmail.com', 'Joe User');    // Jake - Change to whoever TJ wants the target to be
+            $mail->addAddress('', '');    // Change to whoever TJ wants the target to be
             $mail->addReplyTo("$senderEmail", "$senderName");
             $mail->SMTPOptions = array(
                 'ssl' => array(
